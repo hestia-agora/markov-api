@@ -1,0 +1,4 @@
+# Environment variables and configuration files
+.env.local
+.env.production
+
