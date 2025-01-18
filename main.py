@@ -1,14 +1,12 @@
 import numpy as np
-from dotenv import load_dotenv
 import pandas as pd
 from flask import Flask, request, jsonify
 from flask_cors import CORS  # Import CORS
 from decimal import Decimal, ROUND_DOWN
 import os
-
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
-load_dotenv()
+
 # Parameters
 state_names = [
     "Ingen_undernäring", "Risk_för_undernäring", "Undernäring", "Fallolycka",
@@ -191,7 +189,6 @@ def run_model():
     }
 
     return jsonify(results)
-
 
 if __name__ == '__main__':
     port = int(os.getenv("PORT", 5000))  # Use PORT from environment or default to 5000
