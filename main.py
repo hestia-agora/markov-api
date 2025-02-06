@@ -165,9 +165,13 @@ def run_model():
         cycle_costs[i, :] = discounted_costs
         total_costs[i] = np.sum(discounted_costs)
 
+
     # Prepare results
     tp_without_intervention = [[custom_round(value) for value in row] for row in p_matrix[:, :, 0]]
     tp_with_intervention = [[custom_round(value) for value in row] for row in p_matrix[:, :, 1]]
+
+    # Beräkna besparing mellan utan insats och med insats
+    savings = total_costs[0] - total_costs[1]
 
     results = {
         "Transition Probabilities": {
@@ -184,8 +188,12 @@ def run_model():
         },
         "Total Costs": {
             "utan_insats": f"{round(total_costs[0]):,}",
-            "med_insats": f"{round(total_costs[1]):,}"
-        }
+            "med_insats": f"{round(total_costs[1]):,}",
+        },
+
+        "Savings": {
+        "Besparing": f"{round(savings):,} SEK"
+    }
     }
 
     return jsonify(results)
